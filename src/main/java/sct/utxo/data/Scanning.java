@@ -16,7 +16,7 @@ public class Scanning {
 	public static class ToolAi implements Runnable {
 
 		private final Scanner s = new Scanner(System.in);
-		private final String questions[] = { Constants.Q1, Constants.Q2, Constants.Q3, Constants.Q4, Constants.Q5, Constants.Q6, };
+		private final String questions[] = { Constants.Q1, Constants.Q2, Constants.Q3, Constants.Q4, Constants.Q5 };
 
 		private InputDatas datas = new InputDatas();
 
@@ -31,7 +31,7 @@ public class Scanning {
 			System.out.println(Constants.W4);
 			sec1();
 
-			IntStream.range(0, 6).forEach(i -> {
+			IntStream.range(0, 5).forEach(i -> {
 				do {
 					System.out.println(questions[i]);
 				} while (!parseNextLine(s.nextLine(), i));
@@ -72,9 +72,6 @@ public class Scanning {
 			case 4:
 				datas.setRecursive(s.toLowerCase().contains("y"));
 				return true;
-			case 5:
-				datas.setPwd(s);
-				return true;
 			default:
 				return true;
 			}
@@ -114,7 +111,6 @@ public class Scanning {
 		public static String Q3 = "\nInput the maximum utxo per transactions";
 		public static String Q4 = "\nInput the fee per byte in satoshis";
 		public static String Q5 = "\nDo you want to create as many transactions needed to consolidate all utxo on the adress ?";
-		public static String Q6 = "\nInput your password if your wallet is encrypted, or leave blank if you are one of those aliens without password";
 
 		public static String ERR = "\nInvalid answer ! type exit to abandon.";
 	}

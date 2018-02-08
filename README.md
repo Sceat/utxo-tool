@@ -21,8 +21,8 @@ gradle jar
 
 ### How to Use
 
-Place the ```utxo_tool.x.jar``` in a new folder (from ```utxo-tool/build/libs```) .
-Create a ```node_config.properties``` file and put it in the jar folder.
+- Place the ```utxo_tool.x.jar``` in a new folder (from ```utxo-tool/build/libs```) .
+- Create a ```node_config.properties``` file and put it in the jar folder.
 ```
 node.bitcoind.rpc.protocol = http
 node.bitcoind.rpc.host = my.awesome.ip.adress
@@ -31,7 +31,8 @@ node.bitcoind.rpc.user = my_awesome_username
 node.bitcoind.rpc.password = my_awesome_password
 node.bitcoind.http.auth_scheme = Basic
 ```
-Finally launch utxo-tool ```java -jar utxo-tool.x.jar``` and follow the given instructions.
+- Unlock your wallet for a sufficient amount of time.
+- Finally launch utxo-tool ```java -jar utxo-tool.x.jar``` and follow the given instructions.
 
 ---
 
