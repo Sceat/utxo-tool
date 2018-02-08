@@ -15,9 +15,6 @@ import com.neemre.btcdcli4j.core.CommunicationException;
 import com.neemre.btcdcli4j.core.client.BtcdClient;
 import com.neemre.btcdcli4j.core.client.BtcdClientImpl;
 
-import sct.utxo.data.InputDatas;
-import sct.utxo.data.Scanning;
-
 public class UtxoTool {
 
 	static final String VERSION = "0.1.3";
@@ -29,7 +26,7 @@ public class UtxoTool {
 
 	public UtxoTool() {
 		System.out.println("Bitcoin utxo tool v" + VERSION + " by sceat\n");
-		InputDatas data = Scanning.scan();
+		// InputDatas data = Scanning.scan();
 		System.out.println("\nConnection to node.. please wait");
 		try {
 			initRPC();
