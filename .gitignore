@@ -1,3 +1,4 @@
+# Commong gitignore used in @AresRPG Projects
 proguard.map
 proguard.dictionary.random
 
@@ -160,7 +161,4 @@ gradle-app.setting
 
 \.idea/
 
-AresCommons\.iml
-
 *.iml
-src/main/resources/
