@@ -15,17 +15,12 @@ import com.neemre.btcdcli4j.core.CommunicationException;
 import com.neemre.btcdcli4j.core.client.BtcdClient;
 import com.neemre.btcdcli4j.core.client.BtcdClientImpl;
 
-import sct.utxo.data.Scanning;
-import sct.utxo.data.Scanning.ToolAi;
-
 public class UtxoTool {
 
-	static final String VERSION = "0.1";
+	static final String VERSION = "0.1.b";
 	private BtcdClient client;
 
 	public static void main(String[] args) {
-		ToolAi t = new Scanning.ToolAi();
-		t.run();
 	}
 
 	public UtxoTool() {
