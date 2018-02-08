@@ -26,5 +26,4 @@ repositories {
 
 dependencies {
 	compile 'com.neemre.btcd-cli4j:btcd-cli4j-core:0.5.1'
-	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.8.+'
 }

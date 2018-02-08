@@ -15,16 +15,29 @@ import com.neemre.btcdcli4j.core.CommunicationException;
 import com.neemre.btcdcli4j.core.client.BtcdClient;
 import com.neemre.btcdcli4j.core.client.BtcdClientImpl;
 
+import sct.utxo.data.InputDatas;
+import sct.utxo.data.Scanning;
+
 public class UtxoTool {
 
-	static final String VERSION = "0.1.b";
+	static final String VERSION = "0.1.3";
 	private BtcdClient client;
 
 	public static void main(String[] args) {
+		new UtxoTool();
 	}
 
 	public UtxoTool() {
-		System.out.println("Bitcoin utxo tool v" + VERSION + " by sceat");
+		System.out.println("Bitcoin utxo tool v" + VERSION + " by sceat\n");
+		InputDatas data = Scanning.scan();
+		System.out.println("\nConnection to node.. please wait");
+		try {
+			initRPC();
+		} catch (BitcoindException | CommunicationException | IOException e) {
+			e.printStackTrace();
+			shutdown();
+		}
+		System.out.println("successfully connected to node " + client.getNodeVersion());
 	}
 
 	private void initRPC() throws BitcoindException, CommunicationException, IOException {

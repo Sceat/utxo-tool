@@ -7,8 +7,10 @@ import sct.utxo.UtxoTool;
 
 public class Scanning {
 
-	public static void scan() {
-
+	public static InputDatas scan() {
+		ToolAi t = new ToolAi();
+		t.run();
+		return t.getDatas();
 	}
 
 	public static class ToolAi implements Runnable {
@@ -93,6 +95,10 @@ public class Scanning {
 				return false;
 			}
 			return true;
+		}
+
+		public InputDatas getDatas() {
+			return datas;
 		}
 
 	}
