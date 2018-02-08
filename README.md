@@ -1,7 +1,7 @@
 
 ## UTXO TOOL
 
-Utxo tool is a small java program which can consolidate your unspent transactions ! When you mine some coins on a pool that doesn't consolidate itself you will be drowned under thousands of utxo (unspent transactions)
+Utxo tool is a small java program wich can consolidate your unspent transactions ! When you mine some coins on a pool that doesn't consolidate itself you will be drowned under thousands of utxo (unspent transactions)
 
 ![](https://i.imgur.com/aBIT0ue.png)
 
@@ -24,8 +24,8 @@ node.bitcoind.http.auth_scheme = Basic
 ```
 git clone https://github.com/Sceat/utxo-tool.git
 cd utxo-tool
-gradle fatJar
-java -jar build/utxo_tool.jar
+gradle jar
+java -jar build/libs/utxo_tool.0.1.jar
 ``` 
 and then follow instructions.
 
