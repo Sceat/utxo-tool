@@ -9,40 +9,35 @@ import java.util.Properties;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.neemre.btcdcli4j.core.BitcoindException;
 import com.neemre.btcdcli4j.core.CommunicationException;
 import com.neemre.btcdcli4j.core.client.BtcdClient;
 import com.neemre.btcdcli4j.core.client.BtcdClientImpl;
-import com.neemre.btcdcli4j.core.domain.Transaction;
+
+import sct.utxo.data.InputDatas;
+import sct.utxo.data.Scanning;
 
 public class UtxoTool {
 
-	static final String VERSION = "0.1";
-	private static final Logger LOG = LoggerFactory.getLogger(UtxoTool.class);
+	static final String VERSION = "0.1.3";
 	private BtcdClient client;
 
-	/**
-	 * 
-	 * @param args
-	 *            <ul>
-	 *            <li><b>-from</b> The adresse which "contains" all utxos</li>
-	 *            <li><b>-to</b> The adresse where the tool will send coins</li>
-	 *            <li><b>-pwd</b> The pwd to decrypt</li>
-	 *            <li><b>-fees</b> The amount of fees per bytes in satoshis</li>
-	 *            <li><b>-max</b> The max amount of utxo to include in the
-	 *            transaction</li>
-	 *            <li><b>-recursive</b> Wether or not continue until there is no
-	 *            more utxo on the adress</li>
-	 *            </ul>
-	 */
 	public static void main(String[] args) {
+		new UtxoTool();
 	}
 
 	public UtxoTool() {
-		LOG.info("Bitcoin utxo tool v$1 by sceat", VERSION);
+		System.out.println("Bitcoin utxo tool v" + VERSION + " by sceat\n");
+		InputDatas data = Scanning.scan();
+		System.out.println("\nConnection to node.. please wait");
+		try {
+			initRPC();
+		} catch (BitcoindException | CommunicationException | IOException e) {
+			e.printStackTrace();
+			shutdown();
+		}
+		System.out.println("successfully connected to node " + client.getNodeVersion());
 	}
 
 	private void initRPC() throws BitcoindException, CommunicationException, IOException {
@@ -55,7 +50,8 @@ public class UtxoTool {
 		this.client = new BtcdClientImpl(httpProvider, nodeConfig);
 	}
 
-	public Transaction combine(Utxo... utxos) {
-		return null;
+	public static void shutdown() {
+		System.out.println("Bye teddy.");
+		System.exit(0);
 	}
 }
