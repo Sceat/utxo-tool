@@ -1,9 +1,10 @@
-package sct.utxo.data;
+package sct.utxo.util;
 
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
 import sct.utxo.UtxoTool;
+import sct.utxo.data.InputDatas;
 
 public class Scanning {
 
@@ -106,11 +107,11 @@ public class Scanning {
 		public static String W3 = "Awesome !";
 		public static String W4 = "Ready ? please follow my instructions now :";
 
-		public static String Q1 = "Input the first adress wich contain unspent transactions";
+		public static String Q1 = "Input the first adress wich contain unspent transactions (WIP CURRENTLY UNUSED)";
 		public static String Q2 = "\nInput the destination adress where you want to send all coins";
 		public static String Q3 = "\nInput the maximum utxo per transactions";
 		public static String Q4 = "\nInput the fee per byte in satoshis";
-		public static String Q5 = "\nDo you want to create as many transactions needed to consolidate all utxo on the adress ?";
+		public static String Q5 = "\nDo you want to create as many transactions needed to consolidate all utxo on the adress ? (WIP CURRENTLY UNUSED)";
 
 		public static String ERR = "\nInvalid answer ! type exit to abandon.";
 	}

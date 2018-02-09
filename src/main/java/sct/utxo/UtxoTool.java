@@ -1,50 +1,59 @@
 package sct.utxo;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
 import com.neemre.btcdcli4j.core.BitcoindException;
 import com.neemre.btcdcli4j.core.CommunicationException;
 import com.neemre.btcdcli4j.core.client.BtcdClient;
-import com.neemre.btcdcli4j.core.client.BtcdClientImpl;
+
+import sct.utxo.data.InputDatas;
+import sct.utxo.tx.Transactions;
+import sct.utxo.util.RpcConnector;
+import sct.utxo.util.Scanning;
 
 public class UtxoTool {
 
-	static final String VERSION = "0.1.3";
+	static final String VERSION = "0.1.4";
+
+	private final RpcConnector connector = new RpcConnector();
 	private BtcdClient client;
+
+	static final String[] print = { "Bitcoin utxo tool v" + VERSION + " by sceat\nTHIS IS A DEBUG PRINT ONLY VERSION, THE TOOL DOESN'T MAKE ANY TRANSACTIONS YET BUT ONLY PRINT INFOS",
+			"Connecting to node.. please wait", "Unable to initialize the rpc client, aborting..", "successfully connected to node v", };
 
 	public static void main(String[] args) {
 		new UtxoTool();
 	}
 
 	public UtxoTool() {
-		System.out.println("Bitcoin utxo tool v" + VERSION + " by sceat\n");
-		// InputDatas data = Scanning.scan();
-		System.out.println("\nConnection to node.. please wait");
+
+		System.out.println(print[0]);
+
+		InputDatas data = Scanning.scan();
+
+		System.out.println(print[1]);
+
 		try {
-			initRPC();
+			this.client = connector.initRPC();
 		} catch (BitcoindException | CommunicationException | IOException e) {
+			System.err.println(print[2]);
 			e.printStackTrace();
 			shutdown();
 		}
-		System.out.println("successfully connected to node " + client.getNodeVersion());
-	}
 
-	private void initRPC() throws BitcoindException, CommunicationException, IOException {
-		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-		CloseableHttpClient httpProvider = HttpClients.custom().setConnectionManager(cm).build();
-		Properties nodeConfig = new Properties();
-		InputStream is = new BufferedInputStream(new FileInputStream("node_config.properties"));
-		nodeConfig.load(is);
-		is.close();
-		this.client = new BtcdClientImpl(httpProvider, nodeConfig);
+		System.out.println(print[3] + client.getNodeVersion());
+
+		try {
+			System.out.println("you have " + client.getBalance().doubleValue() + " Btc");
+		} catch (BitcoindException | CommunicationException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			new Transactions(client).makeTransaction(data.getAdressTo(), data.getMaxUtxoPerTransaction(), data.getFee());
+		} catch (BitcoindException | CommunicationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void shutdown() {

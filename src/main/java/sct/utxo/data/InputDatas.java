@@ -2,17 +2,9 @@ package sct.utxo.data;
 
 public class InputDatas {
 
-	private String adressFrom, adressTo, pwd;
+	private String adressFrom, adressTo;
 	private int fee, maxUtxoPerTransaction;
 	private boolean recursive;
-
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
 
 	public void setAdressFrom(String adressFrom) {
 		this.adressFrom = adressFrom;
@@ -61,8 +53,7 @@ public class InputDatas {
 
 	@Override
 	public String toString() {
-		return "InputDatas [adressFrom=" + adressFrom + ", adressTo=" + adressTo + ", pwd=" + pwd + ", fee=" + fee + ", maxUtxoPerTransaction=" + maxUtxoPerTransaction + ", recursive=" + recursive
-				+ "]";
+		return "InputDatas [adressFrom=" + adressFrom + ", adressTo=" + adressTo + ", fee=" + fee + ", maxUtxoPerTransaction=" + maxUtxoPerTransaction + ", recursive=" + recursive + "]";
 	}
 
 }
