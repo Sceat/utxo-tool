@@ -16,6 +16,12 @@ jar {
     }
 }
 
+allprojects {
+	repositories {
+			maven { url 'https://jitpack.io' }
+	}
+}
+
 repositories {
     mavenCentral()
     maven {
@@ -25,5 +31,7 @@ repositories {
 }
 
 dependencies {
-	compile 'com.neemre.btcd-cli4j:btcd-cli4j-core:0.5.1'
+	//compile 'com.neemre.btcd-cli4j:btcd-cli4j-core:0.5.1'
+			compile 'com.github.priiduneemre:btcd-cli4j:master'
+	
 }
