@@ -1,6 +1,12 @@
 package sct.utxo;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.neemre.btcdcli4j.core.BitcoindException;
 import com.neemre.btcdcli4j.core.CommunicationException;
@@ -18,8 +24,8 @@ public class UtxoTool {
 	private final RpcConnector connector = new RpcConnector();
 	private BtcdClient client;
 
-	static final String[] print = { "Bitcoin utxo tool v" + VERSION + " by sceat\nTHIS IS A DEBUG PRINT ONLY VERSION, THE TOOL DOESN'T MAKE ANY TRANSACTIONS YET BUT ONLY PRINT INFOS",
-			"Connecting to node.. please wait", "Unable to initialize the rpc client, aborting..", "successfully connected to node v", };
+	static final String[] print = { "Bitcoin utxo tool v" + VERSION + " by sceat", "Connecting to node.. please wait", "Unable to initialize the rpc client, aborting..",
+			"successfully connected to node v", };
 
 	public static void main(String[] args) {
 		new UtxoTool();
@@ -44,9 +50,16 @@ public class UtxoTool {
 		System.out.println(print[3] + client.getNodeVersion());
 
 		try {
-			System.out.println("you have " + client.getBalance().doubleValue() + " Btc");
+			System.out.println("you have " + client.getBalance().doubleValue() + " Coins");
 		} catch (BitcoindException | CommunicationException e) {
 			e.printStackTrace();
+		}
+
+		@SuppressWarnings("unchecked")
+		List<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
+		loggers.add(LogManager.getRootLogger());
+		for (Logger logger : loggers) {
+			logger.setLevel(Level.OFF);
 		}
 
 		try {
