@@ -1,6 +1,6 @@
 ## UTXO TOOL
 
-Utxo tool is a small java program wich can consolidate your unspent transactions outputs ! When you mine some coins on a pool that doesn't consolidate itself you will be drowned under thousands of utxo (unspent transactions outputs) and the moment you when you try to send some coins you get the error ```Transaction too large```
+Utxo tool is a small java program wich can consolidate your unspent transactions outputs ! When you mine some coins on a pool that doesn't consolidate itself you will be drowned under thousands of utxo (unspent transactions outputs) and the moment when you try to send some coins you get the error ```Transaction too large```
 
 ![](https://i.imgur.com/aBIT0ue.png)
 
